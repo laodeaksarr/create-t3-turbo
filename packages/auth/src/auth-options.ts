@@ -9,14 +9,16 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID!,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET!,
+      clientId: process.env.DISCORD_CLIENT_ID as string,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
     }),
     // ...add more providers here
   ],
   callbacks: {
     session({ session, user }) {
-      session.user.id = user.id;
+      if (session.user) {
+        session.user.id = user.id;
+      }
       return session;
     },
   },

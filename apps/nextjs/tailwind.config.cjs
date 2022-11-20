@@ -1,1 +1,3 @@
-module.exports = require("@acme/tailwind-config");
+module.exports = {
+  presets: [require("@acme/tailwind-config")],
+};
