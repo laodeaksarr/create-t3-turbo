@@ -54,23 +54,26 @@ const Home: NextPage = () => {
 export default Home;
 
 const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = trpc.auth.getSession.useQuery();
+  const { data: session } = trpc.auth.getSession.useQuery();
+
+  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
+    undefined, // no input
+    { enabled: !!session?.user },
+  );
 
   return (
-    <div className="flex items-center justify-between gap-8">
-      {sessionData && (
-        <div>
-          <p className="text-2xl text-indigo-500">
-            Logged in as {sessionData?.user?.name}
-          </p>
-          <p className="text-sm text-gray-500">Id: {sessionData?.user?.id}</p>
-        </div>
+    <div className="flex flex-col items-center justify-center gap-4">
+      {session?.user && (
+        <p className="text-center text-2xl text-white">
+          {session && <span>Logged in as {session?.user?.name}</span>}
+          {secretMessage && <span> - {secretMessage}</span>}
+        </p>
       )}
       <button
-        className="rounded-md border border-indigo-700 bg-indigo-500 px-4 py-2 text-xl shadow-lg text-violet-100 hover:bg-indigo-700"
-        onClick={sessionData ? () => signOut() : () => signIn()}
+        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+        onClick={session ? () => signOut() : () => signIn()}
       >
-        {sessionData ? "Sign out" : "Sign in"}
+        {session ? "Sign out" : "Sign in"}
       </button>
     </div>
   );
