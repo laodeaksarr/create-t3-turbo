@@ -3,7 +3,7 @@ import Head from "next/head";
 import { signIn, signOut } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import type { inferProcedureOutput } from "@trpc/server";
-import type { AppRouter } from "@acme/api";
+import type { AppRouter } from "@aksar/api";
 
 const PostCard: React.FC<{
   post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
@@ -58,7 +58,7 @@ const AuthShowcase: React.FC = () => {
 
   const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
     undefined, // no input
-    { enabled: !!session?.user },
+    { enabled: !!session?.user }
   );
 
   return (

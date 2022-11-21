@@ -11,7 +11,7 @@ const config = {
   swcMinify: true,
   experimental: {
     // Enables hot-reload and easy integration for local packages
-    transpilePackages: ["@aksar/api", "@acme/auth", "@acme/db"],
+    transpilePackages: ["@aksar/api", "@aksar/auth", "@aksar/db"],
   },
   // We already do linting on GH actions
   eslint: {
