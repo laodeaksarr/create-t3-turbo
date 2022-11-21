@@ -11,10 +11,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@acme/api": "*",
-    "@acme/auth": "*",
-    "@acme/db": "*",
-    "@acme/tailwind-config": "*",
+    "@aksar/api": "*",
+    "@aksar/auth": "*",
+    "@aksar/db": "*",
+    "@aksar/tailwind-config": "*",
     "@tanstack/react-query": "^4.16.1",
     "@trpc/client": "10.0.0-rc.4",
     "@trpc/next": "10.0.0-rc.4",
