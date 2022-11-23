@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "expo",
-    "slug": "expo",
+    "slug": "laodeaksar",
+    "owner": "ode_aksar",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/f851f596-2be8-42cc-a2b3-845c35d6770a"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -24,10 +26,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.ode_aksar.laodeaksar"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f851f596-2be8-42cc-a2b3-845c35d6770a"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
