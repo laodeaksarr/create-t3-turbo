@@ -92,6 +92,7 @@ importers:
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
       autoprefixer: ^10.4.13
+      dayjs: ^1.11.6
       eslint: ^8.28.0
       eslint-config-next: 13.0.4
       next: ^13.0.5
@@ -99,6 +100,7 @@ importers:
       postcss: ^8.4.19
       react: 18.2.0
       react-dom: 18.2.0
+      react-icons: ^4.7.1
       tailwindcss: ^3.2.4
       typescript: ^4.9.3
       zod: ^3.18.0
@@ -112,10 +114,12 @@ importers:
       '@trpc/next': 10.1.0_7jhp4m32uvzpkauysslpvycneq
       '@trpc/react-query': 10.1.0_6w4fappfojusde7o3jmgvyxwlu
       '@trpc/server': 10.1.0
+      dayjs: 1.11.6
       next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.17.0_7iuvftg57tblwyxclfkwku5xo4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-icons: 4.7.1_react@18.2.0
       zod: 3.19.1
     devDependencies:
       '@types/node': 18.8.0
@@ -2559,7 +2563,7 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@tanstack/react-query': 4.16.1_slnhbjkuf3cktqrwdgz34rrasq
+      '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.1.0_@trpc+server@10.1.0
       '@trpc/server': 10.1.0
       react: 18.2.0
@@ -3965,6 +3969,10 @@ packages:
 
   /dayjs/1.11.5:
     resolution: {integrity: sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==}
+    dev: false
+
+  /dayjs/1.11.6:
+    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
     dev: false
 
   /debug/2.6.9:
@@ -7809,6 +7817,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-icons/4.7.1_react@18.2.0:
+    resolution: {integrity: sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
