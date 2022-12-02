@@ -197,6 +197,25 @@ importers:
       prisma: 4.6.1
       typescript: 4.9.3
 
+  packages/utils:
+    specifiers:
+      '@types/react': ^18.0.25
+      '@types/react-dom': ^18.0.9
+      dayjs: ^1.11.6
+      eslint: ^8.28.0
+      react: 18.2.0
+      react-dom: 18.2.0
+      typescript: ^4.9.3
+    dependencies:
+      dayjs: 1.11.6
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@types/react': 18.0.25
+      '@types/react-dom': 18.0.9
+      eslint: 8.28.0
+      typescript: 4.9.3
+
 packages:
 
   /@ampproject/remapping/2.2.0:
@@ -2563,7 +2582,7 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.16.1_slnhbjkuf3cktqrwdgz34rrasq
       '@trpc/client': 10.1.0_@trpc+server@10.1.0
       '@trpc/server': 10.1.0
       react: 18.2.0
