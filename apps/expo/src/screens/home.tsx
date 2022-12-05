@@ -1,26 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
-import type { inferProcedureOutput } from "@trpc/server";
-import type { AppRouter } from "@aksar/api";
+import type { RouterInputs, RouterOutputs } from "@aksar/api";
 
 import { trpc } from "../utils/trpc";
+import { updateCache, useScrollPosition } from "@aksar/utils";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
+
+const LIMIT = 10;
 
 const PostCard: React.FC<{
-  post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
-}> = ({ post }) => {
+  post: RouterOutputs["post"]["infinite"]["posts"][number];
+  client: QueryClient;
+  input: RouterInputs["post"]["infinite"];
+}> = ({ post, client, input }) => {
+  const likeMutation = trpc.post.like.useMutation({
+    onSuccess: (data, variables) => {
+      updateCache({ client, data, variables, input, action: "like" });
+    },
+  }).mutateAsync;
+  const unlikeMutation = trpc.post.unlike.useMutation({
+    onSuccess: (data, variables) => {
+      updateCache({ client, data, variables, input, action: "unlike" });
+    },
+  }).mutateAsync;
+
+  const hasLiked = post.likes.length > 0;
+
   return (
     <View className="rounded-lg border-2 border-gray-500 p-4">
       <Text className="text-xl font-semibold text-[#cc66ff]">{post.title}</Text>
-      <Text className="text-white">{post.title}</Text>
+      <Text className="text-white">{post.content}</Text>
+
     </View>
   );
 };
@@ -63,9 +77,30 @@ const CreatePost: React.FC = () => {
   );
 };
 
-export const HomeScreen = () => {
-  const postQuery = trpc.post.all.useQuery();
+export const HomeScreen = ({
+  where = {},
+}: {
+  where: RouterInputs["post"]["infinite"]["where"];
+}) => {
   const [showPost, setShowPost] = React.useState<string | null>(null);
+
+  const scrollPosition = useScrollPosition();
+
+  const { data, hasNextPage, fetchNextPage, isFetching } =
+    trpc.post.infinite.useInfiniteQuery(
+      { limit: LIMIT, where },
+      { getNextPageParam: (lastPage) => lastPage.nextCursor },
+    );
+
+  const client = useQueryClient();
+
+  const posts = data?.pages.flatMap((page) => page.posts) ?? [];
+
+  useEffect(() => {
+    if (scrollPosition > 90 && hasNextPage && !isFetching) {
+      fetchNextPage();
+    }
+  }, [scrollPosition, hasNextPage, isFetching, fetchNextPage]);
 
   return (
     <SafeAreaView className="bg-[#2e026d] bg-gradient-to-b from-[#2e026d] to-[#15162c]">
@@ -88,15 +123,23 @@ export const HomeScreen = () => {
         </View>
 
         <FlashList
-          data={postQuery.data}
+          data={posts}
           estimatedItemSize={20}
           ItemSeparatorComponent={() => <View className="h-2" />}
           renderItem={(p) => (
             <TouchableOpacity onPress={() => setShowPost(p.item.id)}>
-              <PostCard post={p.item} />
+              <PostCard
+                post={p.item}
+                client={client}
+                input={{
+                  where,
+                  limit: LIMIT,
+                }}
+              />
             </TouchableOpacity>
           )}
         />
+        {!hasNextPage && <Text>No more items to load</Text>}
 
         <CreatePost />
       </View>

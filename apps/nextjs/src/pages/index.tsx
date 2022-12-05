@@ -2,10 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut } from "next-auth/react";
 import { RouterInputs, RouterOutputs, trpc } from "../utils/trpc";
-import { formatDay, useScrollPosition } from "@aksar/utils";
+import { formatDay, updateCache, useScrollPosition } from "@aksar/utils";
 import { useQueryClient, QueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import updateCache from "../helpers/updateChache";
 import { AiFillHeart } from "react-icons/ai";
 
 const LIMIT = 10;

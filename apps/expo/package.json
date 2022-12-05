@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@aksar/api": "*",
+    "@aksar/utils": "*",
     "@aksar/tailwind-config": "*",
     "@shopify/flash-list": "^1.4.0",
     "@tanstack/react-query": "^4.16.1",

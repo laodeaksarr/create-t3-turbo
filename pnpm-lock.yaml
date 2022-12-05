@@ -26,6 +26,7 @@ importers:
     specifiers:
       '@aksar/api': '*'
       '@aksar/tailwind-config': '*'
+      '@aksar/utils': '*'
       '@babel/core': ^7.19.3
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
@@ -52,6 +53,7 @@ importers:
     dependencies:
       '@aksar/api': link:../../packages/api
       '@aksar/tailwind-config': link:../../packages/config/tailwind
+      '@aksar/utils': link:../../packages/utils
       '@shopify/flash-list': 1.4.0_bznrqlx657afr3ph3snqmu46li
       '@tanstack/react-query': 4.16.1_slnhbjkuf3cktqrwdgz34rrasq
       '@trpc/client': 10.4.3_@trpc+server@10.4.3
@@ -205,6 +207,8 @@ importers:
 
   packages/utils:
     specifiers:
+      '@aksar/api': '*'
+      '@tanstack/react-query': ^4.16.1
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
       dayjs: ^1.11.6
@@ -213,6 +217,8 @@ importers:
       react-dom: 18.2.0
       typescript: ^4.9.3
     dependencies:
+      '@aksar/api': link:../api
+      '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
       dayjs: 1.11.6
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
