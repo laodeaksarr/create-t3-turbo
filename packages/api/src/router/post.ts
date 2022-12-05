@@ -21,7 +21,7 @@ export const postRouter = router({
       },
     });
   }),
-  timeline: publicProcedure
+  infinite: publicProcedure
     .input(
       z.object({
         where: z

@@ -31,9 +31,9 @@ importers:
       '@babel/runtime': ^7.19.0
       '@shopify/flash-list': ^1.4.0
       '@tanstack/react-query': ^4.16.1
-      '@trpc/client': ^10.1.0
-      '@trpc/react-query': ^10.1.0
-      '@trpc/server': ^10.1.0
+      '@trpc/client': ^10.4.3
+      '@trpc/react-query': ^10.4.3
+      '@trpc/server': ^10.4.3
       '@types/react': ^18.0.25
       '@types/react-native': ~0.70.6
       eslint: ^8.28.0
@@ -54,9 +54,9 @@ importers:
       '@aksar/tailwind-config': link:../../packages/config/tailwind
       '@shopify/flash-list': 1.4.0_bznrqlx657afr3ph3snqmu46li
       '@tanstack/react-query': 4.16.1_slnhbjkuf3cktqrwdgz34rrasq
-      '@trpc/client': 10.1.0_@trpc+server@10.1.0
-      '@trpc/react-query': 10.1.0_6w4fappfojusde7o3jmgvyxwlu
-      '@trpc/server': 10.1.0
+      '@trpc/client': 10.4.3_@trpc+server@10.4.3
+      '@trpc/react-query': 10.4.3_5ijwefg6eofh7kgd6hijgpfc5q
+      '@trpc/server': 10.4.3
       expo: 47.0.6_@babel+core@7.19.3
       expo-status-bar: 1.4.2
       expo-updates: 0.15.6_expo@47.0.6
@@ -83,11 +83,12 @@ importers:
       '@aksar/auth': '*'
       '@aksar/db': '*'
       '@aksar/tailwind-config': '*'
+      '@aksar/utils': '*'
       '@tanstack/react-query': ^4.16.1
-      '@trpc/client': ^10.1.0
-      '@trpc/next': ^10.1.0
-      '@trpc/react-query': ^10.1.0
-      '@trpc/server': ^10.1.0
+      '@trpc/client': ^10.4.3
+      '@trpc/next': ^10.4.3
+      '@trpc/react-query': ^10.4.3
+      '@trpc/server': ^10.4.3
       '@types/node': ^18.0.0
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
@@ -109,11 +110,12 @@ importers:
       '@aksar/auth': link:../../packages/auth
       '@aksar/db': link:../../packages/db
       '@aksar/tailwind-config': link:../../packages/config/tailwind
+      '@aksar/utils': link:../../packages/utils
       '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
-      '@trpc/client': 10.1.0_@trpc+server@10.1.0
-      '@trpc/next': 10.1.0_7jhp4m32uvzpkauysslpvycneq
-      '@trpc/react-query': 10.1.0_6w4fappfojusde7o3jmgvyxwlu
-      '@trpc/server': 10.1.0
+      '@trpc/client': 10.4.3_@trpc+server@10.4.3
+      '@trpc/next': 10.4.3_vcanpfkvm7kjtdiwx3blm2mpei
+      '@trpc/react-query': 10.4.3_5ijwefg6eofh7kgd6hijgpfc5q
+      '@trpc/server': 10.4.3
       dayjs: 1.11.6
       next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.17.0_7iuvftg57tblwyxclfkwku5xo4
@@ -136,20 +138,24 @@ importers:
     specifiers:
       '@aksar/auth': '*'
       '@aksar/db': '*'
-      '@trpc/client': ^10.1.0
-      '@trpc/server': ^10.1.0
+      '@trpc/client': ^10.4.3
+      '@trpc/server': ^10.4.3
+      '@types/ws': ^8.5.3
       eslint: ^8.28.0
       superjson: ^1.9.1
       typescript: ^4.9.3
+      ws: ^8.0.0
       zod: ^3.18.0
     dependencies:
       '@aksar/auth': link:../auth
       '@aksar/db': link:../db
-      '@trpc/client': 10.1.0_@trpc+server@10.1.0
-      '@trpc/server': 10.1.0
+      '@trpc/client': 10.4.3_@trpc+server@10.4.3
+      '@trpc/server': 10.4.3
       superjson: 1.10.0
+      ws: 8.11.0
       zod: 3.19.1
     devDependencies:
+      '@types/ws': 8.5.3
       eslint: 8.28.0
       typescript: 4.9.3
 
@@ -2544,53 +2550,53 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /@trpc/client/10.1.0_@trpc+server@10.1.0:
-    resolution: {integrity: sha512-E7L9l2OTa5lIdM0NYvQLJf/GLapskfiVLv0Jv7t6GVxEOFd+O4THWsWQgJVUUAz9iq805iMNkY3uqSvf4GJaWg==}
+  /@trpc/client/10.4.3_@trpc+server@10.4.3:
+    resolution: {integrity: sha512-VMdyLHr6PG2FlMxnbPt/6jniDBxv3Ys1hFhk0AriFDD9h4Lg9fznwGn5RI1eV5RCOAoCQ/+ZwPMSKOMBhiycTw==}
     peerDependencies:
-      '@trpc/server': 10.1.0
+      '@trpc/server': 10.4.3
     dependencies:
-      '@trpc/server': 10.1.0
+      '@trpc/server': 10.4.3
     dev: false
 
-  /@trpc/next/10.1.0_7jhp4m32uvzpkauysslpvycneq:
-    resolution: {integrity: sha512-bJ3zMbrSO+udhMi/8KZ1JY5VpXsucTOat08LdU5MPXzMFEQ+d0QehoM4PoZirO39batZfM0rmbCJ8w6P5hLCow==}
+  /@trpc/next/10.4.3_vcanpfkvm7kjtdiwx3blm2mpei:
+    resolution: {integrity: sha512-H4sM3lrtA2seFFkgXcW3ZQLCqGS7YqJNYDQx8FOlvcoH+klmQ+UNNgurdP2R/i50nGFwc4aN9kENrsvq0xfH5A==}
     peerDependencies:
       '@tanstack/react-query': ^4.3.8
-      '@trpc/client': 10.1.0
+      '@trpc/client': 10.4.3
       '@trpc/react-query': ^10.0.0-proxy-beta.21
-      '@trpc/server': 10.1.0
+      '@trpc/server': 10.4.3
       next: '*'
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
       '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
-      '@trpc/client': 10.1.0_@trpc+server@10.1.0
-      '@trpc/react-query': 10.1.0_6w4fappfojusde7o3jmgvyxwlu
-      '@trpc/server': 10.1.0
+      '@trpc/client': 10.4.3_@trpc+server@10.4.3
+      '@trpc/react-query': 10.4.3_5ijwefg6eofh7kgd6hijgpfc5q
+      '@trpc/server': 10.4.3
       next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-ssr-prepass: 1.5.0_react@18.2.0
     dev: false
 
-  /@trpc/react-query/10.1.0_6w4fappfojusde7o3jmgvyxwlu:
-    resolution: {integrity: sha512-Xjx3m73CDuBNrpAOF6scUQedYyp4LIxthwmdjw8Y+iR193XNwFTH+C8TZn5qOLVw9u/FM5YchAJjPPgUJyXBBQ==}
+  /@trpc/react-query/10.4.3_5ijwefg6eofh7kgd6hijgpfc5q:
+    resolution: {integrity: sha512-gm8hnV8Q7RPc0am0paSuu30+jk9cQoJhKByAdrTRoLUEkuDb7r78sebN6RM3OYMPfWfSBGutIoWHkjJzP2kdtw==}
     peerDependencies:
       '@tanstack/react-query': ^4.3.8
-      '@trpc/client': 10.1.0
-      '@trpc/server': 10.1.0
+      '@trpc/client': 10.4.3
+      '@trpc/server': 10.4.3
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
       '@tanstack/react-query': 4.16.1_slnhbjkuf3cktqrwdgz34rrasq
-      '@trpc/client': 10.1.0_@trpc+server@10.1.0
-      '@trpc/server': 10.1.0
+      '@trpc/client': 10.4.3_@trpc+server@10.4.3
+      '@trpc/server': 10.4.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@trpc/server/10.1.0:
-    resolution: {integrity: sha512-UiRZPApLruhi1UKukTNsB9igFBEhEA0aMxy86Xp1OvbzuY00yoFcvDUYsBdBjp9mzIHR3yNjqrlfS/RNpPhZEw==}
+  /@trpc/server/10.4.3:
+    resolution: {integrity: sha512-U+TVFtMUnySUfKHXjdpdZdFS268naGafbjQiG/H7t0OKpiLnbJ4IhgyYzj82Hvghb6Ow9E+UTNt6ALP7KoN4/g==}
     dev: false
 
   /@types/istanbul-lib-coverage/2.0.4:
@@ -2675,6 +2681,12 @@ packages:
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
     dev: false
+
+  /@types/ws/8.5.3:
+    resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
+    dependencies:
+      '@types/node': 18.8.0
+    dev: true
 
   /@types/yargs-parser/21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -9508,6 +9520,19 @@ packages:
   /ws/7.5.9:
     resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==}
     engines: {node: '>=8.3.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
+
+  /ws/8.11.0:
+    resolution: {integrity: sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==}
+    engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
       utf-8-validate: ^5.0.2

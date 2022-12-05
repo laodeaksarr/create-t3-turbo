@@ -1,25 +1,83 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut } from "next-auth/react";
-import { trpc } from "../utils/trpc";
-import type { inferProcedureOutput } from "@trpc/server";
-import type { AppRouter } from "@aksar/api";
+import { RouterInputs, RouterOutputs, trpc } from "../utils/trpc";
+import { formatDay, useScrollPosition } from "@aksar/utils";
+import { useQueryClient, QueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+import updateCache from "../helpers/updateChache";
+import { AiFillHeart } from "react-icons/ai";
+
+const LIMIT = 10;
 
 const PostCard: React.FC<{
-  post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
-}> = ({ post }) => {
+  post: RouterOutputs["post"]["infinite"]["posts"][number];
+  client: QueryClient;
+  input: RouterInputs["post"]["infinite"];
+}> = ({ client, post, input }) => {
+  const likeMutation = trpc.post.like.useMutation({
+    onSuccess: (data, variables) => {
+      updateCache({ client, data, variables, input, action: "like" });
+    },
+  }).mutateAsync;
+  const unlikeMutation = trpc.post.unlike.useMutation({
+    onSuccess: (data, variables) => {
+      updateCache({ client, data, variables, input, action: "unlike" });
+    },
+  }).mutateAsync;
+
+  const hasLiked = post.likes.length > 0;
+
   return (
-    <div className="p-4 border-2 border-gray-500 rounded-lg max-w-2xl hover:scale-[101%] transition-all">
+    <div className="max-w-2xl rounded-lg border-2 border-gray-500 p-4 transition-all hover:scale-[101%]">
       <h2 className="text-2xl font-bold text-[hsl(280,100%,70%)]">
-        {post.title}
+        {post.title} - {formatDay(post.createdAt).fromNow()}
       </h2>
       <p>{post.content}</p>
+      <div className="mt-4 flex items-center p-2">
+        <AiFillHeart
+          color={hasLiked ? "red" : "gray"}
+          size="1.5rem"
+          onClick={() => {
+            if (hasLiked) {
+              unlikeMutation({
+                postId: post.id,
+              });
+              return;
+            }
+
+            likeMutation({
+              postId: post.id,
+            });
+          }}
+        />
+
+        <span className="text-sm text-gray-500">{post._count.likes}</span>
+      </div>
     </div>
   );
 };
 
-const Home: NextPage = () => {
-  const postQuery = trpc.post.all.useQuery();
+const Home: NextPage<{ where: RouterInputs["post"]["infinite"]["where"] }> = ({
+  where = {},
+}) => {
+  const scrollPosition = useScrollPosition();
+
+  const { data, hasNextPage, fetchNextPage, isFetching } =
+    trpc.post.infinite.useInfiniteQuery(
+      { limit: LIMIT, where },
+      { getNextPageParam: (lastPage) => lastPage.nextCursor },
+    );
+
+  const client = useQueryClient();
+
+  const posts = data?.pages.flatMap((page) => page.posts) ?? [];
+
+  useEffect(() => {
+    if (scrollPosition > 90 && hasNextPage && !isFetching) {
+      fetchNextPage();
+    }
+  }, [scrollPosition, hasNextPage, isFetching, fetchNextPage]);
 
   return (
     <>
@@ -34,16 +92,23 @@ const Home: NextPage = () => {
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> Turbo
           </h1>
           <AuthShowcase />
-          <div className="flex justify-center px-4 text-2xl overflow-y-scroll h-[60vh]">
-            {postQuery.data ? (
-              <div className="flex flex-col gap-4">
-                {postQuery.data?.map((p) => {
-                  return <PostCard key={p.id} post={p} />;
-                })}
-              </div>
-            ) : (
-              <p>Loading..</p>
-            )}
+          <div className="flex h-[60vh] justify-center overflow-y-scroll px-4 text-2xl">
+            <div className="flex flex-col gap-4">
+              {posts.map((p) => {
+                return (
+                  <PostCard
+                    key={p.id}
+                    post={p}
+                    client={client}
+                    input={{
+                      where,
+                      limit: LIMIT,
+                    }}
+                  />
+                );
+              })}
+            </div>
+            {!hasNextPage && <p>No more items to load</p>}
           </div>
         </div>
       </main>
@@ -58,7 +123,7 @@ const AuthShowcase: React.FC = () => {
 
   const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
     undefined, // no input
-    { enabled: !!session?.user }
+    { enabled: !!session?.user },
   );
 
   return (
