@@ -139,8 +139,6 @@ export const HomeScreen = ({
             </TouchableOpacity>
           )}
         />
-        {!hasNextPage && <Text>No more items to load</Text>}
-
         <CreatePost />
       </View>
     </SafeAreaView>
