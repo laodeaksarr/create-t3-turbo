@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 import type { RouterInputs, RouterOutputs } from "@aksar/api";
@@ -9,6 +9,7 @@ import type { RouterInputs, RouterOutputs } from "@aksar/api";
 import { trpc } from "../utils/trpc";
 import { updateCache, useScrollPosition } from "@aksar/utils";
 import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@clerk/clerk-expo";
 
 const LIMIT = 10;
 
@@ -83,7 +84,9 @@ export const HomeScreen = ({
   where: RouterInputs["post"]["infinite"]["where"];
 }) => {
   const [showPost, setShowPost] = React.useState<string | null>(null);
-
+  const secretQuery = trpc.auth.getSecretMessage.useQuery();
+  //not used -  const sessionQuery = trpc.auth.getSession.useQuery();
+  
   const scrollPosition = useScrollPosition();
 
   const { data, hasNextPage, fetchNextPage, isFetching } =
@@ -102,11 +105,20 @@ export const HomeScreen = ({
     }
   }, [scrollPosition, hasNextPage, isFetching, fetchNextPage]);
 
+  const { signOut } = useAuth();
+
   return (
     <SafeAreaView className="bg-[#2e026d] bg-gradient-to-b from-[#2e026d] to-[#15162c]">
       <View className="h-full w-full p-4">
         <Text className="mx-auto pb-2 text-5xl font-bold text-white">
           Create <Text className="text-[#cc66ff]">T3</Text> Turbo
+        </Text>
+
+        <Button onPress={() => signOut()} title={"LOGOUT"} />
+        {/*<ProtectedPageLink />*/}
+
+        <Text className="mx-auto pb-2 text-5xl font-bold text-white">
+          {JSON.stringify(secretQuery.data)}
         </Text>
 
         <View className="py-2">
