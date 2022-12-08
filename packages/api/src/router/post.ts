@@ -13,13 +13,7 @@ const getPermaLink = (title: string) =>
 
 export const postRouter = router({
   all: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.post.findMany({
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-      },
-    });
+    return ctx.prisma.post.findMany();
   }),
   infinite: publicProcedure
     .input(
