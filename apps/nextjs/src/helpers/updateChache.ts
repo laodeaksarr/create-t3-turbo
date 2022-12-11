@@ -1,5 +1,5 @@
+import { RouterInputs, RouterOutputs } from "@aksar/api";
 import { InfiniteData, QueryClient } from "@tanstack/react-query";
-import { RouterInputs, RouterOutputs } from "../utils/trpc";
 
 const updateCache = ({
   client,

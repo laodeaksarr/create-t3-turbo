@@ -1,4 +1,4 @@
-import { RouterOutputs } from "../utils/trpc";
+import { RouterOutputs } from "@aksar/api";
 
 export type Comment = RouterOutputs["comment"]["all"][number]
 

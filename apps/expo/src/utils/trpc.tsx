@@ -1,15 +1,11 @@
 import { createTRPCReact } from "@trpc/react-query";
-import type { AppRouter } from "@aksar/api";
-/**
- * A set of typesafe hooks for consuming your API.
- */
-export const trpc = createTRPCReact<AppRouter>();
 
 /**
  * Extend this function when going to production by
  * setting the baseUrl to your production API URL.
  */
 import Constants from "expo-constants";
+
 const getBaseUrl = () => {
   /**
    * Gets the IP address of your host-machine. If it cannot automatically find it,
@@ -30,13 +26,14 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { transformer } from "@aksar/api/transformer";
+import { AppRouter, trpcNative } from "@aksar/api";
 
 export const TRPCProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [queryClient] = React.useState(() => new QueryClient());
   const [trpcClient] = React.useState(() =>
-    trpc.createClient({
+    trpcNative.createClient({
       transformer,
       links: [
         httpBatchLink({
@@ -47,8 +44,8 @@ export const TRPCProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+    <trpcNative.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </trpc.Provider>
+    </trpcNative.Provider>
   );
 };

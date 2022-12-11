@@ -3,4 +3,7 @@ export { appRouter } from "./src/router";
 
 export { createContext } from "./src/context";
 export type { Context } from "./src/context";
-export type { RouterInputs, RouterOutputs } from "./src/trpc";
+export type { RouterInputs, RouterOutputs } from "./src/client";
+
+export { trpc } from "./src/client";
+export { trpc as trpcNative } from "./src/client/index.native";

@@ -4,9 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
-import type { RouterOutputs } from "@aksar/api";
+import { RouterOutputs, trpcNative } from "@aksar/api";
 
-import { trpc } from "../utils/trpc";
 import { useAuth } from "@clerk/clerk-expo";
 
 const PostCard: React.FC<{
@@ -34,8 +33,8 @@ const PostCard: React.FC<{
 };
 
 const CreatePost: React.FC = () => {
-  const utils = trpc.useContext();
-  const { mutate } = trpc.post.create.useMutation({
+  const utils = trpcNative.useContext();
+  const { mutate } = trpcNative.post.create.useMutation({
     async onSuccess() {
       await utils.post.all.invalidate();
     },
@@ -73,10 +72,10 @@ const CreatePost: React.FC = () => {
 
 export const HomeScreen = () => {
   const [showPost, setShowPost] = React.useState<string | null>(null);
-  const secretQuery = trpc.auth.getSecretMessage.useQuery();
+  const secretQuery = trpcNative.auth.getSecretMessage.useQuery();
   //not used -  const sessionQuery = trpc.auth.getSession.useQuery();
 
-  const postQuery = trpc.post.all.useQuery();
+  const postQuery = trpcNative.post.all.useQuery();
 
   const { signOut } = useAuth();
 

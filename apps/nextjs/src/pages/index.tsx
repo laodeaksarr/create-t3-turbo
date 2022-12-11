@@ -1,11 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut } from "next-auth/react";
-import { RouterInputs, RouterOutputs, trpc } from "../utils/trpc";
+//import { RouterInputs, RouterOutputs, trpc } from "../utils/trpc";
 import { formatDay, updateCache, useScrollPosition } from "@aksar/utils";
 import { useQueryClient, QueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AiFillHeart } from "react-icons/ai";
+import { RouterInputs, RouterOutputs } from "@aksar/api";
+import { trpc } from "@aksar/api/src/client";
 
 const LIMIT = 10;
 
