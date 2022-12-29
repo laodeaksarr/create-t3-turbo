@@ -8,11 +8,8 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  swcMinify: true,
-  experimental: {
-    // Enables hot-reload and easy integration for local packages
-    transpilePackages: ["@aksar/api", "@aksar/auth", "@aksar/db"],
-  },
+  // Enables hot-reload and easy integration for local packages
+  transpilePackages: ["@aksar/api", "@aksar/auth", "@aksar/db"],
   // We already do linting on GH actions
   eslint: {
     ignoreDuringBuilds: !!process.env.CI,
