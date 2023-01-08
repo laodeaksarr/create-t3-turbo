@@ -20,14 +20,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.laodeaksar.expo"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.ode_aksar.laodeaksar"
+      "package": "com.laodeaksar.expo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
