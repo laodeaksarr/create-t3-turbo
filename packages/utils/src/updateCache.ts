@@ -35,7 +35,7 @@ const updateCache = ({
 
       const newPosts = newData.pages.map((page) => {
         return {
-          posts: page.posts.map((post) => {
+          posts: page.posts.map((post: any) => {
             if (post.id === variables.postId) {
               return {
                 ...post,

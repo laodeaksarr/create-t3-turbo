@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
-import { RouterOutputs, trpcNative } from "@aksar/api";
+import { RouterOutputs, trpcNative as api } from "@aksar/api";
 
 import { useAuth } from "@clerk/clerk-expo";
 
@@ -33,8 +33,8 @@ const PostCard: React.FC<{
 };
 
 const CreatePost: React.FC = () => {
-  const utils = trpcNative.useContext();
-  const { mutate } = trpcNative.post.create.useMutation({
+  const utils = api.useContext();
+  const { mutate } = api.post.create.useMutation({
     async onSuccess() {
       await utils.post.all.invalidate();
     },
@@ -72,10 +72,10 @@ const CreatePost: React.FC = () => {
 
 export const HomeScreen = () => {
   const [showPost, setShowPost] = React.useState<string | null>(null);
-  const secretQuery = trpcNative.auth.getSecretMessage.useQuery();
+  const secretQuery = api.auth.getSecretMessage.useQuery();
   //not used -  const sessionQuery = trpc.auth.getSession.useQuery();
 
-  const postQuery = trpcNative.post.all.useQuery();
+  const postQuery = api.post.all.useQuery();
 
   const { signOut } = useAuth();
 
@@ -111,7 +111,7 @@ export const HomeScreen = () => {
           estimatedItemSize={20}
           ItemSeparatorComponent={() => <View className="h-2" />}
           renderItem={(p) => (
-            <TouchableOpacity onPress={() => setShowPost(p.item.id)}>
+            <TouchableOpacity onPress={() => setShowPost(p.item)}>
               <PostCard post={p.item} />
             </TouchableOpacity>
           )}

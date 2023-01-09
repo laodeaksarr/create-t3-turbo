@@ -21,7 +21,7 @@ import { useAuth } from "@clerk/clerk-expo";
 /**
  * A set of typesafe hooks for consuming your API.
  */
-export const trpc = createTRPCReact<AppRouter>();
+export const api = createTRPCReact<AppRouter>();
 
 const getBaseUrl = () => {
   /**
@@ -37,7 +37,7 @@ const getBaseUrl = () => {
 
 export const TRPCProvider: React.FC<{
   children: React.ReactNode;
-  authToken: string | null;
+  authToken?: string | null;
 }> = ({ children /*, authToken*/ }) => {
   //authToken prop is not used here
   //Instead, useAuth is getting token directly from clerk.
@@ -47,7 +47,7 @@ export const TRPCProvider: React.FC<{
   const { getToken } = useAuth();
   const [queryClient] = React.useState(() => new QueryClient());
   const [trpcClient] = React.useState(() =>
-    trpc.createClient({
+    api.createClient({
       transformer,
       links: [
         httpBatchLink({
@@ -64,9 +64,9 @@ export const TRPCProvider: React.FC<{
   );
 
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+    <api.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </trpc.Provider>
+    </api.Provider>
   );
 };
 

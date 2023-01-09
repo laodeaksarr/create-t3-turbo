@@ -7,7 +7,7 @@ import { useQueryClient, QueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { RouterInputs, RouterOutputs } from "@aksar/api";
-import { trpc } from "@aksar/api/src/client";
+import { api } from "@aksar/api";
 
 const LIMIT = 10;
 
@@ -16,12 +16,12 @@ const PostCard: React.FC<{
   client: QueryClient;
   input: RouterInputs["post"]["infinite"];
 }> = ({ client, post, input }) => {
-  const likeMutation = trpc.post.like.useMutation({
+  const likeMutation = api.post.like.useMutation({
     onSuccess: (data, variables) => {
       updateCache({ client, data, variables, input, action: "like" });
     },
   }).mutateAsync;
-  const unlikeMutation = trpc.post.unlike.useMutation({
+  const unlikeMutation = api.post.unlike.useMutation({
     onSuccess: (data, variables) => {
       updateCache({ client, data, variables, input, action: "unlike" });
     },
@@ -65,7 +65,7 @@ const Home: NextPage<{ where: RouterInputs["post"]["infinite"]["where"] }> = ({
   const scrollPosition = useScrollPosition();
 
   const { data, hasNextPage, fetchNextPage, isFetching } =
-    trpc.post.infinite.useInfiniteQuery(
+    api.post.infinite.useInfiniteQuery(
       { limit: LIMIT, where },
       { getNextPageParam: (lastPage) => lastPage.nextCursor },
     );
@@ -120,9 +120,9 @@ const Home: NextPage<{ where: RouterInputs["post"]["infinite"]["where"] }> = ({
 export default Home;
 
 const AuthShowcase: React.FC = () => {
-  const { data: session } = trpc.auth.getSession.useQuery();
+  const { data: session } = api.auth.getSession.useQuery();
 
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
+  const { data: secretMessage } = api.auth.getSecretMessage.useQuery(
     undefined, // no input
     { enabled: !!session?.user },
   );
